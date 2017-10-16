@@ -13,7 +13,7 @@
 # limitations under the License.
 
 kind: Deployment
-apiVersion: v1beta2
+apiVersion: extensions/v1beta1
 metadata:
   name: outyet-frontend-production
 spec:
