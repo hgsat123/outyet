@@ -23,9 +23,9 @@ node {
   // Change deployed image in Production to the one we just built
   sh("sed -i.bak 's#hgsat123/outyet:1.0#${imageTag}#' ./k8s/production/*.yaml")
   def ns_exist = sh("kubectl get ns | grep production | cut -d' ' -f1")
-  if(!${ns_exist) {
+  if(!$ns_exist)
      sh("kubectl create -f ns production") 
-  }
+
   sh("kubectl --namespace=production apply -f k8s/services/")
   sh("kubectl --namespace=production apply -f k8s/production/")
   sh("kubectl --namespace=production apply -f k8s/lb/")
