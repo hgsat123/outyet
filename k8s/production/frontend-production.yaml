@@ -31,8 +31,8 @@ spec:
         image: hgsat123/outyet:1.0
         resources:
           limits:
-            memory: "500Mi"
-            cpu: "100m"
+            memory: "100Mi"
+            cpu: "50m"
         imagePullPolicy: Always
         readinessProbe:
           httpGet:
