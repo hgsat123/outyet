@@ -1,9 +1,10 @@
 node {
+  def project = 'sys'
   def appName = 'outyet'
   def feSvcName = "${appName}-frontend"
-  def registry = "hgsat123"
+  def registry = "172.31.17.242:5000"
   def imageNm = "${appName}:${env.BUILD_NUMBER}"
-  def imageTag = "$registry/${imageNm}"
+  def imageTag = "${registry}/${project}/${imageNm}"
 
   checkout scm
 
@@ -20,7 +21,7 @@ node {
   stage "Deploy Application"
   // Roll out to production
   // Change deployed image in Production to the one we just built
-  sh("sed -i.bak 's#hgsat123/outyet:1.0#${imageTag}#' ./k8s/production/*.yaml")
+  sh("sed -i.bak "s#hgsat123/outyet:1.0#${imageTag}#" ./k8s/production/*.yaml")
   sh("kubectl create ns production") 
   sh("kubectl --namespace=production apply -f k8s/services/")
   sh("kubectl --namespace=production apply -f k8s/production/")
